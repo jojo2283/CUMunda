@@ -1,9 +1,12 @@
 spring.datasource.url: jdbc:h2:file:./camunda-h2-database
 
-camunda.bpm.admin-user:
-  id: demo
-  password: demo
-
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+    authorization:
+      enabled: true
 spring:
   datasource:
     url: jdbc:postgresql://ru.dmitriy.space:31460/itmo

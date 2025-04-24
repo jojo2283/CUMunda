@@ -1,6 +1,7 @@
 package com.example.workflow.entities;
 
 
+import com.example.workflow.util.RolesConverter;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -29,8 +30,8 @@ public class User /*implements UserDetails */ {
     private String username;
     private String password;
 
-//    @Column(name = "roles", nullable = false)
-//    @Convert(converter = RolesConverter.class)
+    @Column(name = "roles", nullable = false)
+    @Convert(converter = RolesConverter.class)
     private Set<Role> roles = new HashSet<>();
 
     private int points = 0;

@@ -8,6 +8,7 @@ import com.example.workflow.repositories.AnswerRepository;
 import com.example.workflow.repositories.AssignmentRepository;
 import com.example.workflow.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.camunda.bpm.engine.IdentityService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,8 @@ public class AddBonuspoints  implements JavaDelegate {
     private  final AssignmentRepository assignmentRepository;
     private  final AnswerRepository answerRepository;
     private final UserRepository userRepository;
+
+    private final IdentityService identityService;
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         Long answerId = Long.parseLong((String) delegateExecution.getVariable("answer_id"));
@@ -30,6 +33,9 @@ public class AddBonuspoints  implements JavaDelegate {
         User user = answer.getUser();
         user.setPoints(user.getPoints() + assignment.getPoints());
         userRepository.save(user);
+
+//        User = identityService.getCurrentAuthentication().getUserId();
+
         System.out.println("Adding bonuspoints");
     }
 }
