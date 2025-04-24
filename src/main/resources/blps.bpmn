@@ -225,7 +225,7 @@
       <bpmn:incoming>Flow_1uikxew</bpmn:incoming>
       <bpmn:outgoing>Flow_1pu0btz</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_0xqlf8z" name="Выбрать желаемые курс и задание" camunda:formKey="embedded:app:forms/selectCourse.html">
+    <bpmn:userTask id="Activity_0xqlf8z" name="Выбрать желаемые курс и задание" camunda:formKey="camunda-forms:/forms/selectCourse.form">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_1h7veq4</bpmn:incoming>
       <bpmn:outgoing>Flow_1uikxew</bpmn:outgoing>
