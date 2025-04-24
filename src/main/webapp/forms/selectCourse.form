@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "values": [
+        {
+          "label": "Курс 1",
+          "value": "1"
+        },
+        {
+          "label": "Курс 2",
+          "value": "курс 2"
+        },
+        {
+          "label": "Курс 3",
+          "value": "курс 3"
+        }
+      ],
+      "label": "Выберите курс",
+      "type": "select",
+      "layout": {
+        "row": "Row_1cof93r",
+        "columns": 16
+      },
+      "id": "Field_1mkcttd",
+      "key": "select_cource",
+      "searchable": false,
+      "disabled": false,
+      "readonly": false
+    }
+  ],
+  "type": "default",
+  "id": "selectCourse",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.20.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 15
+}
