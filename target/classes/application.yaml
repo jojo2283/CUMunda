@@ -4,6 +4,19 @@ camunda.bpm.admin-user:
   id: demo
   password: demo
 
+spring:
+  datasource:
+    url: jdbc:postgresql://ru.dmitriy.space:31460/itmo
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
 
 
 #spring:
