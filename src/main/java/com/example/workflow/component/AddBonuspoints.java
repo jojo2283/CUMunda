@@ -21,7 +21,7 @@ public class AddBonuspoints  implements JavaDelegate {
     private final UserRepository userRepository;
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long answerId = (Long) delegateExecution.getVariable("answer_id");
+        Long answerId = Long.parseLong((String) delegateExecution.getVariable("answer_id"));
         Long assignmentId = Long.parseLong((String) delegateExecution.getVariable("task_id"));
 
         Assignment assignment = assignmentRepository.findById(assignmentId).orElseThrow(()->new NoSuchAssigmentException("Assignment not found!"));
