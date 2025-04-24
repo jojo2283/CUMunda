@@ -33,6 +33,7 @@ public class CheckAnswer implements JavaDelegate {
 
         answer.setIsCorrect(isCorrect);
         answer.setNeedVerify(Boolean.FALSE);
+
         userRepository.save(answer.getUser());
         answerRepository.save(answer);
 
