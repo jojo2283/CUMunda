@@ -1,0 +1,49 @@
+{
+  "components": [
+    {
+      "label": "Id ответа",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1vfqjep",
+        "columns": null
+      },
+      "id": "Field_1gmgm8p",
+      "key": "answer_id"
+    },
+    {
+      "label": "Options",
+      "values": [
+        {
+          "label": "Correct",
+          "value": "true"
+        },
+        {
+          "label": "Incorrectly",
+          "value": "false"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_17gukwo",
+        "columns": null
+      },
+      "id": "Field_1m9c2ox",
+      "key": "radio_0f0oic8",
+      "validate": {
+        "required": true
+      },
+      "properties": {
+        "key1": "value"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_15d795k",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.34.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.23.0",
+  "schemaVersion": 18
+}
