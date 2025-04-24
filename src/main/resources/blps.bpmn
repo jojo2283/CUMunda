@@ -21,9 +21,7 @@
         <bpmn:flowNodeRef>Gateway_15ecpwb</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0tbaj8l</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_02ri4w0</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1unnahc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0u12nr8</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1iw62pj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_17bq9bo</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0z8kkrx</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_18nkvsi</bpmn:flowNodeRef>
@@ -34,18 +32,20 @@
         <bpmn:flowNodeRef>Event_14fee0s</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1egyka1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1s3eiwd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1iw62pj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1unnahc</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0yqcfm6" name="Обучающийся">
         <bpmn:flowNodeRef>Activity_10ft2cz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1n3gon5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_03vzy1u</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0fgghkj</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1dy6f9y</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_09h2loe</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0x5c04g</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>select_course</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>add_solve</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0d202lf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1dy6f9y</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:task id="Activity_001qgha" name="Вернуть бонусы">
@@ -76,10 +76,6 @@
       <bpmn:incoming>Flow_1c6k5d5</bpmn:incoming>
       <bpmn:outgoing>Flow_1l5xkgr</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Activity_1unnahc" name="Начислить бонусы">
-      <bpmn:incoming>Flow_0uh5351</bpmn:incoming>
-      <bpmn:outgoing>Flow_0pdzv37</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:endEvent id="Event_0u12nr8" name="Отправить уведомление преподавателю">
       <bpmn:incoming>Flow_174ai8u</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1wachey" messageRef="Message_32oa1ua" />
@@ -100,17 +96,9 @@
       <bpmn:incoming>Flow_1wd3azo</bpmn:incoming>
       <bpmn:outgoing>Flow_11vm6nv</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Activity_1iw62pj" name="Проверить задание">
-      <bpmn:incoming>Flow_0zrl2io</bpmn:incoming>
-      <bpmn:outgoing>Flow_0tr5ru4</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:task id="Activity_0w1mf5i" name="Проверить задание с открытым ответом">
       <bpmn:incoming>Flow_1l5xkgr</bpmn:incoming>
       <bpmn:outgoing>Flow_0bg11gn</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Activity_1dy6f9y" name="Просмотр информации о товаре">
-      <bpmn:incoming>Flow_11vm6nv</bpmn:incoming>
-      <bpmn:outgoing>Flow_1kst57o</bpmn:outgoing>
     </bpmn:task>
     <bpmn:task id="Activity_17bq9bo" name="Просмотреть количество бонусов у пользователя">
       <bpmn:incoming>Flow_036bexi</bpmn:incoming>
@@ -183,7 +171,7 @@
       <bpmn:incoming>Flow_1uikxew</bpmn:incoming>
       <bpmn:outgoing>Flow_1pu0btz</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_0d202lf" name="Отправить задание" camunda:delegateExpression="${submitAnswer}">
+    <bpmn:serviceTask id="Activity_0d202lf" name="Отправить задание" camunda:delegateExpression="${sendAnswer}">
       <bpmn:incoming>Flow_1pu0btz</bpmn:incoming>
       <bpmn:outgoing>Flow_11e7ngo</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -230,6 +218,18 @@
     <bpmn:sequenceFlow id="Flow_1h7veq4" sourceRef="Event_09h2loe" targetRef="select_course" />
     <bpmn:sequenceFlow id="Flow_1uikxew" sourceRef="select_course" targetRef="add_solve" />
     <bpmn:sequenceFlow id="Flow_1pu0btz" sourceRef="add_solve" targetRef="Activity_0d202lf" />
+    <bpmn:serviceTask id="Activity_1iw62pj" name="Проверить задание" camunda:delegateExpression="${checkAnswer}">
+      <bpmn:incoming>Flow_0zrl2io</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tr5ru4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:task id="Activity_1dy6f9y" name="Просмотр информации о товаре">
+      <bpmn:incoming>Flow_11vm6nv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kst57o</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:serviceTask id="Activity_1unnahc" name="Начислить бонусы" camunda:delegateExpression="${addBonuspoints}">
+      <bpmn:incoming>Flow_0uh5351</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pdzv37</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:message id="Message_0rlhh0q" name="purchase_message" />
   <bpmn:message id="Message_32oa1ua" name="add_bonuspoints" />
@@ -273,7 +273,7 @@
       <bpmndi:BPMNShape id="Gateway_0tbaj8l_di" bpmnElement="Gateway_0tbaj8l" isMarkerVisible="true">
         <dc:Bounds x="865" y="360" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="862" y="417" width="57" height="40" />
+          <dc:Bounds x="821" y="417" width="57" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_02ri4w0_di" bpmnElement="Gateway_02ri4w0" isMarkerVisible="true">
@@ -284,10 +284,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1e9tc9b_di" bpmnElement="Activity_1e9tc9b">
         <dc:Bounds x="310" y="495" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1unnahc_di" bpmnElement="Activity_1unnahc">
-        <dc:Bounds x="970" y="345" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0u12nr8_di" bpmnElement="Event_0u12nr8">
@@ -312,10 +308,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0fgghkj_di" bpmnElement="Activity_0fgghkj">
         <dc:Bounds x="1200" y="105" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1iw62pj_di" bpmnElement="Activity_1iw62pj">
-        <dc:Bounds x="720" y="345" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0w1mf5i_di" bpmnElement="Activity_0w1mf5i">
@@ -396,6 +388,12 @@
       <bpmndi:BPMNShape id="Activity_0t63vrg_di" bpmnElement="Activity_0d202lf">
         <dc:Bounds x="600" y="105" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18xw50v_di" bpmnElement="Activity_1iw62pj">
+        <dc:Bounds x="720" y="345" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0y3au9d_di" bpmnElement="Activity_1unnahc">
+        <dc:Bounds x="970" y="345" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1a8pa9y_di" bpmnElement="Flow_1a8pa9y">
         <di:waypoint x="2210" y="645" />
         <di:waypoint x="2230" y="645" />
@@ -421,8 +419,9 @@
         <di:waypoint x="2110" y="645" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0bg11gn_di" bpmnElement="Flow_0bg11gn">
-        <di:waypoint x="700" y="504" />
-        <di:waypoint x="874" y="394" />
+        <di:waypoint x="700" y="536" />
+        <di:waypoint x="890" y="536" />
+        <di:waypoint x="890" y="410" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0tr5ru4_di" bpmnElement="Flow_0tr5ru4">
         <di:waypoint x="820" y="385" />
