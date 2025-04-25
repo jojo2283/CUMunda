@@ -1,0 +1,47 @@
+{
+  "components": [
+    {
+      "label": "Купить",
+      "values": [
+        {
+          "label": "ДА",
+          "value": "true"
+        },
+        {
+          "label": "нет",
+          "value": "False"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1mk0evq",
+        "columns": null
+      },
+      "id": "Field_063k7ta",
+      "key": "radio_wjqdzx",
+      "defaultValue": "true",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Купить",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_0d7pvyj",
+        "columns": null
+      },
+      "id": "Field_1yzgpvr"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1yqvqgh",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.34.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.23.0",
+  "schemaVersion": 18
+}

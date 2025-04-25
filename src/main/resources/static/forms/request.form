@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Ввдите id заявки на возврат",
+      "type": "number",
+      "layout": {
+        "row": "Row_0g1oizt",
+        "columns": null
+      },
+      "id": "Field_1ntoqsb",
+      "key": "request_id"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0p7c7y4",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.34.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.23.0",
+  "schemaVersion": 18
+}

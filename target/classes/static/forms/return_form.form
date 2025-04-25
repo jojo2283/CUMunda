@@ -1,0 +1,78 @@
+{
+  "components": [
+    {
+      "text": "# Заявка на воврат",
+      "type": "text",
+      "layout": {
+        "row": "Row_1km4nha",
+        "columns": null
+      },
+      "id": "Field_1xhlpw3"
+    },
+    {
+      "label": "Username",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0jllcga",
+        "columns": null
+      },
+      "id": "Field_0ver0nr",
+      "key": "transacton_username",
+      "disabled": true
+    },
+    {
+      "label": "Название продукта",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ut4dh5",
+        "columns": null
+      },
+      "id": "Field_1o2zvbe",
+      "key": "transaction_productname",
+      "disabled": true
+    },
+    {
+      "label": "Points",
+      "type": "number",
+      "layout": {
+        "row": "Row_1c7cip1",
+        "columns": null
+      },
+      "id": "Field_1a88klo",
+      "key": "transaction_points",
+      "disabled": true
+    },
+    {
+      "label": "",
+      "values": [
+        {
+          "label": " Принять",
+          "value": "true"
+        },
+        {
+          "label": "Отклонить",
+          "value": "false"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0i9q7m6",
+        "columns": null
+      },
+      "id": "Field_0iwm0z0",
+      "key": "approve",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_09ta8dv",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.34.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.23.0",
+  "schemaVersion": 18
+}

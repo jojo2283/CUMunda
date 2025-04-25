@@ -12,7 +12,7 @@
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
-    <show-object-properties value="true" />
+    <show-object-properties value="false" />
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
@@ -24,7 +24,12 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" object-ref="schemas/public/tables/products" />
+      <object connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" object-ref="schemas/public/tables/return_request_entity" />
+      <object connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" object-ref="schemas/public/tables/transactions" />
+      <object connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" object-ref="schemas/public/tables/users" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" />
@@ -33,6 +38,9 @@
     <filter-actions connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" dataset="public.users" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" dataset="public.assignments" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" dataset="public.answers" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" dataset="public.transactions" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" dataset="public.products" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" dataset="public.return_request_entity" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="df10e3cb-0e74-40d9-afe8-6bfcc489d975" dataset="public.act_ru_job" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">

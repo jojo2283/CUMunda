@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 
 @RequiredArgsConstructor
-@Component
+@Component(value = "addBonuspoints")
 public class AddBonuspoints  implements JavaDelegate {
     private  final AssignmentRepository assignmentRepository;
     private  final AnswerRepository answerRepository;
@@ -24,7 +24,7 @@ public class AddBonuspoints  implements JavaDelegate {
     private final IdentityService identityService;
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Long answerId = Long.parseLong((String) delegateExecution.getVariable("answer_id"));
+        Long answerId = (Long) delegateExecution.getVariable("answer_id");
         Long assignmentId = Long.parseLong((String) delegateExecution.getVariable("task_id"));
 
         Assignment assignment = assignmentRepository.findById(assignmentId).orElseThrow(()->new NoSuchAssigmentException("Assignment not found!"));
