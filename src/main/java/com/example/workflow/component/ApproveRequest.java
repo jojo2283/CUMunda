@@ -1,6 +1,7 @@
 package com.example.workflow.component;
 
 import com.example.workflow.entities.ReturnRequestEntity;
+import com.example.workflow.entities.Role;
 import com.example.workflow.entities.Transaction;
 import com.example.workflow.entities.User;
 import com.example.workflow.repositories.ReturnRepository;
@@ -17,22 +18,45 @@ public class ApproveRequest implements JavaDelegate {
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
     private final ReturnRepository returnRepository;
+
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Object value = delegateExecution.getVariable("request_id");
-        Long requestId = value instanceof Long
-                ? (Long) value
-                : ((Number) value).longValue();
 
 
-        ReturnRequestEntity request = returnRepository.findById(requestId).orElseThrow(() -> new RuntimeException("Return request not found"));
-        Transaction transaction = transactionRepository.findById(request.getTransactionId()).orElseThrow(() -> new RuntimeException("Transaction not found"));
-        transaction.setRefunded(true);
+        String userId = delegateExecution.getProcessEngineServices()
+                .getIdentityService()
+                .getCurrentAuthentication()
+                .getUserId();
 
-        User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setPoints(user.getPoints() + request.getPointsUsed());
-        userRepository.save(user);
-        transactionRepository.save(transaction);
-        returnRepository.deleteById(requestId);
+
+        User user = userRepository.findByUsername(userId)
+                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+
+        if (user.getRoles().contains(Role.ADMIN)) {
+
+            Object value = delegateExecution.getVariable("request_id");
+            Long requestId = value instanceof Long
+                    ? (Long) value
+                    : ((Number) value).longValue();
+
+
+            ReturnRequestEntity request = returnRepository.findById(requestId).orElseThrow(() -> new RuntimeException("Return request not found"));
+            Transaction transaction = transactionRepository.findById(request.getTransactionId()).orElseThrow(() -> new RuntimeException("Transaction not found"));
+            transaction.setRefunded(true);
+
+            User userFromRequest = userRepository.findById(request.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
+            userFromRequest.setPoints(userFromRequest.getPoints() + request.getPointsUsed());
+            userRepository.save(userFromRequest);
+            transactionRepository.save(transaction);
+            returnRepository.deleteById(requestId);
+
+
+            System.out.println("Админ принял ответ: " + userId);
+        } else {
+            System.out.println("Пользователь " + userId + " не имеет прав ADMIN");
+
+            throw new RuntimeException("Недостаточно прав");
+        }
+
     }
 }
