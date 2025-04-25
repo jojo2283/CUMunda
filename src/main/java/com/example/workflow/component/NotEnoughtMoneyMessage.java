@@ -1,11 +1,13 @@
 package com.example.workflow.component;
 
 import com.example.workflow.entities.Answer;
+import com.example.workflow.entities.Product;
 import com.example.workflow.entities.User;
+import com.example.workflow.exception.NoSuchProductException;
 import com.example.workflow.kafka.EmailRequest;
 import com.example.workflow.kafka.KafkaProducer;
 import com.example.workflow.repositories.AnswerRepository;
-import com.example.workflow.repositories.UserRepository;
+import com.example.workflow.repositories.ProductRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +17,11 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class Retrymessage implements JavaDelegate {
+public class NotEnoughtMoneyMessage implements JavaDelegate {
     private final KafkaProducer kafkaProducer;
     private final ObjectMapper objectMapper;
     private final AnswerRepository answerRepository;
+    private final ProductRepository productRepository;
 
 
     @Override
@@ -27,16 +30,22 @@ public class Retrymessage implements JavaDelegate {
         Long answerId = (Long) delegateExecution.getVariable("answer_id");
         Answer answer = answerRepository.findById(answerId).orElseThrow(() -> new RuntimeException("Answer not found"));
 
+        Long productId = Long.parseLong((String) delegateExecution.getVariable("product_id"));
+
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchProductException("Product not found"));
+
+
+        int price = product.getPrice();
+
         User user = answer.getUser();
         try {
             String json = objectMapper.writeValueAsString(new EmailRequest(
                     user.getEmail(),
                     "Навык коробка",
-                    "Вы неправильно ответили на задание. Попробуйте ещё раз чтобы получить " + answer.getAssignment().getPoints() + " баллов за верно выполненное задание."
+                    "У вас недостаточно баллов. Наберите еще  " + Math.abs(user.getPoints() - price) + " баллов."
 
             ));
             kafkaProducer.sendMessage(json);
-            System.out.println(user.getEmail());
         } catch (JsonProcessingException ex) {
             throw new RuntimeException();
         }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1ql2fec" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.34.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:collaboration id="Collaboration_0q8dg6a">
+    <bpmn:participant id="Participant_04fpp6v" processRef="Process_0mjijrs" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0mjijrs" isExecutable="true" camunda:historyTimeToLive="1">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_07fg5ut</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1nd04b9">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R5/PT10S</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_1rsv3n9" name="Разослать спам пользователям на почту" camunda:delegateExpression="${emailDistribution}">
+      <bpmn:incoming>Flow_07fg5ut</bpmn:incoming>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_07fg5ut" sourceRef="StartEvent_1" targetRef="Activity_1rsv3n9" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0q8dg6a">
+      <bpmndi:BPMNShape id="Participant_04fpp6v_di" bpmnElement="Participant_04fpp6v" isHorizontal="true">
+        <dc:Bounds x="160" y="120" width="600" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0n97w49_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="242" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pch8dr_di" bpmnElement="Activity_1rsv3n9">
+        <dc:Bounds x="350" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_07fg5ut_di" bpmnElement="Flow_07fg5ut">
+        <di:waypoint x="278" y="200" />
+        <di:waypoint x="350" y="200" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
