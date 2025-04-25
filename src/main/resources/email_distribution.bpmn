@@ -7,7 +7,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_07fg5ut</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1nd04b9">
-        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R5/PT10S</bpmn:timeCycle>
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/PT10M</bpmn:timeCycle>
       </bpmn:timerEventDefinition>
     </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_1rsv3n9" name="Разослать спам пользователям на почту" camunda:delegateExpression="${emailDistribution}">
