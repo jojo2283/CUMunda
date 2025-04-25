@@ -5,7 +5,6 @@ import com.example.workflow.entities.User;
 import com.example.workflow.kafka.EmailRequest;
 import com.example.workflow.kafka.KafkaProducer;
 import com.example.workflow.repositories.AnswerRepository;
-import com.example.workflow.repositories.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +27,9 @@ public class Retrymessage implements JavaDelegate {
         Answer answer = answerRepository.findById(answerId).orElseThrow(() -> new RuntimeException("Answer not found"));
 
         User user = answer.getUser();
+
+        answer.setIsCorrect(false);
+        answerRepository.save(answer);
         try {
             String json = objectMapper.writeValueAsString(new EmailRequest(
                     user.getEmail(),
