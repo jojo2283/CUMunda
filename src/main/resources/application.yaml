@@ -31,12 +31,18 @@ spring:
       mail:
         smtp:
           auth: true
-          starttls.enable: true
+          starttls:
+            enable: true
+
   kafka:
     bootstrap-servers: ru.dmitriy.space:31411
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties.spring.json.trusted.packages: "*"
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
 
 #spring:
 #  security:
