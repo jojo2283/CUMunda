@@ -33,6 +33,8 @@ public class AddBonuspoints  implements JavaDelegate {
         User user = answer.getUser();
         user.setPoints(user.getPoints() + assignment.getPoints());
         userRepository.save(user);
+        answer.setIsCorrect(true);
+        answerRepository.save(answer);
 
 //        User = identityService.getCurrentAuthentication().getUserId();
 

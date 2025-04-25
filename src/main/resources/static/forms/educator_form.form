@@ -1,40 +1,14 @@
 {
   "components": [
     {
-      "label": "Id ответа",
-      "type": "textfield",
+      "label": "Введите id ответа",
+      "type": "number",
       "layout": {
-        "row": "Row_1vfqjep",
+        "row": "Row_04s6srj",
         "columns": null
       },
-      "id": "Field_1gmgm8p",
-      "key": "answer_id"
-    },
-    {
-      "label": "Options",
-      "values": [
-        {
-          "label": "Correct",
-          "value": "true"
-        },
-        {
-          "label": "Incorrectly",
-          "value": "false"
-        }
-      ],
-      "type": "radio",
-      "layout": {
-        "row": "Row_17gukwo",
-        "columns": null
-      },
-      "id": "Field_1m9c2ox",
-      "key": "radio_0f0oic8",
-      "validate": {
-        "required": true
-      },
-      "properties": {
-        "key1": "value"
-      }
+      "id": "Field_1dz3bit",
+      "key": "answer_to_check"
     }
   ],
   "type": "default",

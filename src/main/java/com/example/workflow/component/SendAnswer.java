@@ -1,6 +1,8 @@
 package com.example.workflow.component;
 
-import com.example.workflow.entities.*;
+import com.example.workflow.entities.Answer;
+import com.example.workflow.entities.Assignment;
+import com.example.workflow.entities.User;
 import com.example.workflow.exception.NoSuchAssigmentException;
 import com.example.workflow.repositories.AnswerRepository;
 import com.example.workflow.repositories.AssignmentRepository;
@@ -9,10 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -37,15 +35,21 @@ public class SendAnswer implements JavaDelegate {
         answer.setNeedVerify(assignment.isRequiresManualReview());
 
 
-        //TODO вот сюда надо заебашить пользователя
-        User user = new User();
-        user.setRoles(new HashSet<>(List.of(Role.USER)));
-        user.setEmail("no-email@example.com");
+        String userId = delegateExecution.getProcessEngineServices()
+                .getIdentityService()
+                .getCurrentAuthentication()
+                .getUserId();
+
+
+        User user = userRepository.findByUsername(userId)
+                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+
+
         answer.setUser(user);
 
         userRepository.save(answer.getUser());
         answerRepository.save(answer);
-        delegateExecution.setVariable("answer_id", answer.getId()); //TODO вот тут хуита
+        delegateExecution.setVariable("answer_id", answer.getId());
         System.out.println("Sending answer!");
     }
 }
