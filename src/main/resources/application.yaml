@@ -21,6 +21,22 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         ddl-auto: update
 
+  mail:
+    username: bermasdenis@yandex.com
+    password:
+    host: smtp.yandex.ru
+    port: 465
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+  kafka:
+    bootstrap-servers: ru.dmitriy.space:31411
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties.spring.json.trusted.packages: "*"
 
 #spring:
 #  security:

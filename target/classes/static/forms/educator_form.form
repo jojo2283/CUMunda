@@ -1,13 +1,13 @@
 {
   "components": [
     {
-      "label": "Введите id ответа",
-      "type": "number",
+      "label": "Id ответа",
+      "type": "textfield",
       "layout": {
-        "row": "Row_04s6srj",
+        "row": "Row_1vfqjep",
         "columns": null
       },
-      "id": "Field_1dz3bit",
+      "id": "Field_1gmgm8p",
       "key": "answer_to_check"
     }
   ],
